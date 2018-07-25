@@ -34,7 +34,7 @@ node('master') {
             }
         }
 
-         stage('Build'){
+        stage('Build'){
             docker.image('jenkins_build_image').inside('-u root'){
               echo 'Build.'
             }
