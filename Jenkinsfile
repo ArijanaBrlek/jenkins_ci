@@ -1,4 +1,3 @@
-
 #!groovy
 
 @Library('sharedlib')
