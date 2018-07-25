@@ -1,7 +1,23 @@
 node('master') {
     ws("/var/jenkins_home/workspace/testing_jenkinsfile")
     {
-        stage('Lint'){
+        stage('Git checkout') {
+            checkout([
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[
+                    $class: 'CloneOption',
+                    noTags: false,
+                    shallow: false,
+                    depth: 0,
+                    reference: ''
+                ]],
+                userRemoteConfigs: scm.userRemoteConfigs,
+            ])
+        }
+
+        stage('Lint') {
             docker.image('jenkins_build_image').inside('-u root'){
               sh "pylint --rcfile=/home/testing/.pylintrc --output-format=parseable /home/testing/hello_world > pylint.log || exit 0"
               sh 'cat pylint.log'
