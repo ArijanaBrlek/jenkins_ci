@@ -67,8 +67,7 @@ confidence=
 # --disable=W"
 disable=
     missing-docstring,
-    import-error,
-    missing-docstring
+    import-error
 
 [REPORTS]
 
